@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { Button, FormControl, FormGroup, Input,InputLabel, Typography, styled } from '@mui/material';
 import { addUser } from '../service/Api';
-
+import {useNavigate} from 'react-router-dom';
 
 
 const Container = styled(FormGroup)`
@@ -24,14 +24,17 @@ const defaultvalue = {
 
 function Adduser() {
     const [user, setUser]= useState(defaultvalue);
+    const navigate = useNavigate();
     function onvalueChange(e) {
-        console.log(e.target.name, e.target.value);
+        //console.log(e.target.name, e.target.value);
         setUser({...user, [e.target.name] : e.target.value})
-        console.log(user);
+        //console.log(user);
     }
     const addUserdetails = async() =>{
         await addUser(user);
+        navigate('/all');
     }
+ 
     return (
        <Container>
             <Typography variant='h3'>Adduser</Typography>
